@@ -1,0 +1,69 @@
+{
+  "case_id": "ENV-1",
+  "scope": {
+    "fft_call": {
+      "verdict": "suggestions",
+      "packages": [
+        "mkl_fft"
+      ]
+    }
+  },
+  "findings": {
+    "np.fft.fft": {
+      "surface": "fft",
+      "package": "mkl_fft",
+      "verdict": "fit",
+      "required_reason_codes": [
+        "covered_transform",
+        "already_wired_possible"
+      ]
+    }
+  },
+  "package_verdicts": {
+    "mkl_fft": "fit",
+    "mkl_random": "not_present",
+    "mkl_umath": "not_present"
+  },
+  "environment": {
+    "allowed_strategies": [
+      "probe",
+      "ask",
+      "conditional"
+    ],
+    "required_checks": [
+      "fft_module"
+    ],
+    "forbidden_checks": [
+      "fft_is_patched",
+      "version_string"
+    ]
+  },
+  "confirmation": {
+    "required": false,
+    "packages": []
+  },
+  "install_guidance": {
+    "mode": "conditional",
+    "pip_index_mode": "primary",
+    "conda_override_channels": true
+  },
+  "required_proofs": [
+    "fft_module"
+  ],
+  "required_text_any": [
+    [
+      "np.fft.fft.__module__"
+    ],
+    [
+      "mkl_fft.interfaces._numpy_fft"
+    ],
+    [
+      "is_patched",
+      "false"
+    ]
+  ],
+  "forbidden_text": [
+    "already uses MKL",
+    "patch_fft("
+  ]
+}

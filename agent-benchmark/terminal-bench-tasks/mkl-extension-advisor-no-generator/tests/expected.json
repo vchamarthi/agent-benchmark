@@ -1,0 +1,76 @@
+{
+  "case_id": "NO-1",
+  "scope": {
+    "draw_samples": {
+      "verdict": "no_suggestions",
+      "packages": []
+    }
+  },
+  "findings": {
+    "np.random.default_rng": {
+      "surface": "random",
+      "package": "mkl_random",
+      "verdict": "no_fit",
+      "required_reason_codes": [
+        "modern_generator_unsupported"
+      ]
+    },
+    "rng.standard_normal": {
+      "surface": "random",
+      "package": "mkl_random",
+      "verdict": "no_fit",
+      "required_reason_codes": [
+        "modern_generator_unsupported"
+      ]
+    },
+    "rng.integers": {
+      "surface": "random",
+      "package": "mkl_random",
+      "verdict": "no_fit",
+      "required_reason_codes": [
+        "modern_generator_unsupported"
+      ]
+    }
+  },
+  "package_verdicts": {
+    "mkl_fft": "not_present",
+    "mkl_random": "no_fit",
+    "mkl_umath": "not_present"
+  },
+  "environment": {
+    "allowed_strategies": [
+      "not_applicable"
+    ],
+    "required_checks": [],
+    "forbidden_checks": [
+      "version_string"
+    ]
+  },
+  "confirmation": {
+    "required": false,
+    "packages": []
+  },
+  "install_guidance": {
+    "mode": "none",
+    "pip_index_mode": "not_applicable",
+    "conda_override_channels": false
+  },
+  "required_proofs": [],
+  "required_text_any": [
+    [
+      "default_rng",
+      "Generator"
+    ],
+    [
+      "MKLRandomState"
+    ],
+    [
+      "different sequence",
+      "reproducibility"
+    ]
+  ],
+  "forbidden_text": [
+    "patching will accelerate",
+    "mkl_random.RandomState("
+  ]
+}

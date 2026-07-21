@@ -1,0 +1,80 @@
+{
+  "case_id": "FIT-1",
+  "scope": {
+    "bandpass_batch": {
+      "verdict": "suggestions",
+      "packages": [
+        "mkl_fft"
+      ]
+    }
+  },
+  "findings": {
+    "np.fft.rfft": {
+      "surface": "fft",
+      "package": "mkl_fft",
+      "verdict": "fit",
+      "required_reason_codes": [
+        "covered_transform",
+        "repeated_transform"
+      ]
+    },
+    "np.fft.irfft": {
+      "surface": "fft",
+      "package": "mkl_fft",
+      "verdict": "fit",
+      "required_reason_codes": [
+        "covered_transform",
+        "repeated_transform"
+      ]
+    }
+  },
+  "package_verdicts": {
+    "mkl_fft": "fit",
+    "mkl_random": "not_present",
+    "mkl_umath": "not_present"
+  },
+  "environment": {
+    "allowed_strategies": [
+      "probe",
+      "ask",
+      "conditional"
+    ],
+    "required_checks": [
+      "fft_module"
+    ],
+    "forbidden_checks": [
+      "fft_is_patched",
+      "version_string"
+    ]
+  },
+  "confirmation": {
+    "required": false,
+    "packages": []
+  },
+  "install_guidance": {
+    "mode": "conditional",
+    "pip_index_mode": "primary",
+    "conda_override_channels": true
+  },
+  "required_proofs": [
+    "fft_module"
+  ],
+  "required_text_any": [
+    [
+      "patch_numpy_fft",
+      "mkl_fft()"
+    ],
+    [
+      "mkl_fft.interfaces._numpy_fft"
+    ],
+    [
+      "float32",
+      "complex64"
+    ]
+  ],
+  "forbidden_text": [
+    "patch_fft(",
+    "mkl_random.randn",
+    "np.show_config"
+  ]
+}
